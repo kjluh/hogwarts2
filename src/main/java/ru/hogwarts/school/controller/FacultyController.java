@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -22,7 +23,7 @@ public class FacultyController {
         if (example != null) {
             return ResponseEntity.ok(example);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("allfaculty/{color}")
@@ -42,7 +43,7 @@ public class FacultyController {
             facultyService.updateFaculty(faculty);
             return ResponseEntity.ok(faculty);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @DeleteMapping("{id}")
@@ -52,7 +53,7 @@ public class FacultyController {
             facultyService.deleteFaculty(id);
             ResponseEntity.ok();
         } else {
-            ResponseEntity.badRequest().build();
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

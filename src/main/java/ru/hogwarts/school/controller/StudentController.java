@@ -18,12 +18,8 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
-        if (studentService.getStudent(id) != null) {
-            return ResponseEntity.ok(studentService.getStudent(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public Student getStudent(@PathVariable Long id) {
+        return studentService.getStudent(id);
     }
 
     @GetMapping("allStudents/{age}")
@@ -37,24 +33,14 @@ public class StudentController {
     }
 
     @PutMapping
-    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
-        Student example = studentService.getStudent(student.getId());
-        if (example != null) {
-            studentService.updateStudent(student);
-            return ResponseEntity.ok(student);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public Student updateStudent(@RequestBody Student student) {
+        return studentService.updateStudent(student);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable Long id) {
-        Student example = studentService.getStudent(id);
-        if (example != null) {
+    public ResponseEntity deleteStudent(@PathVariable Long id) {
             studentService.deleteStudent(id);
-          return   ResponseEntity.ok(example);
-        }
-         return    ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return ResponseEntity.ok().build();
 
     }
 }
