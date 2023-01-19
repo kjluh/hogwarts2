@@ -1,6 +1,7 @@
 package ru.hogwarts.school.servise;
 
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
@@ -16,11 +17,11 @@ public class StudentService {
     }
 
     public Student getStudent(Long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
     public List<Student> getStudentByAge(int age) {
-        return studentRepository.findAll().stream().filter(e->e.getAge()==age).toList();
+        return studentRepository.findAll().stream().filter(e -> e.getAge() == age).toList();
     }
 
     public Student createStudent(Student student) {

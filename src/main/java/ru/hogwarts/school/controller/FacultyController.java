@@ -40,20 +40,18 @@ public class FacultyController {
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {
         Faculty example = facultyService.getFaculty(faculty.getId());
         if (example != null) {
-            facultyService.updateFaculty(faculty);
-            return ResponseEntity.ok(faculty);
+            return ResponseEntity.ok(facultyService.updateFaculty(faculty));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @DeleteMapping("{id}")
-    public void deleteFaculty(@PathVariable Long id) {
+    public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
         Faculty example = facultyService.getFaculty(id);
         if (example != null) {
             facultyService.deleteFaculty(id);
-            ResponseEntity.ok();
-        } else {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.ok(example);
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
