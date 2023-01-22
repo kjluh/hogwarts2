@@ -3,9 +3,11 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.servise.StudentService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -26,10 +28,27 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-
     @GetMapping("allStudents/{age}")
     public List<Student> getStudentByAge(@PathVariable int age) {
         return studentService.getStudentByAge(age);
+    }
+
+    @GetMapping("studentByAge")
+    public ResponseEntity<Collection<Student>> findAllByAgeBetween(@RequestParam int max, @RequestParam int min) {
+        Collection<Student> example = studentService.findAllByAgeBetween(max, min);
+        if (example != null) {
+            return ResponseEntity.ok(example);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @GetMapping("studentFaculty")
+    public ResponseEntity<Faculty> findByName(@RequestParam String name) {
+        Faculty faculty = studentService.findByName(name);
+        if (faculty != null) {
+            return ResponseEntity.ok(faculty);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping

@@ -2,9 +2,11 @@ package ru.hogwarts.school.servise;
 
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,5 +36,17 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    public Collection<Student> findAllByAgeBetween(int max, int min) {
+        return studentRepository.findByAgeBetween(max, min);
+    }
+
+    public Faculty findByName(String name) {
+        Student s = studentRepository.findStudentByNameIgnoreCase(name);
+        if (s == null) {
+            return null;
+        }
+        return s.getFaculty();
     }
 }
