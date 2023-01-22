@@ -43,8 +43,8 @@ public class StudentController {
     }
 
     @GetMapping("studentFaculty")
-    public ResponseEntity<Faculty> findByName(@RequestParam String name) {
-        Faculty faculty = studentService.findByName(name);
+    public ResponseEntity<Collection<Student>> findByName(@RequestParam String name) {
+        Collection<Student> faculty = studentService.findByName(name);
         if (faculty != null) {
             return ResponseEntity.ok(faculty);
         }

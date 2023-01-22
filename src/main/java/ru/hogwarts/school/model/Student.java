@@ -11,6 +11,16 @@ public class Student {
     private String name;
     private int age;
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", faculty=" + faculty +
+                '}';
+    }
+
     @ManyToOne
     @JoinColumn(name = "Faculty_ID")
     private Faculty faculty;
@@ -41,15 +51,6 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
     }
 
     @Override
