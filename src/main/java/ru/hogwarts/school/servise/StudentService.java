@@ -40,11 +40,11 @@ public class StudentService {
         return studentRepository.findByAgeBetween(max, min);
     }
 
-    public Collection<Student> findByName(String name) {
-        Collection<Student> s = studentRepository.findStudentByNameIgnoreCase(name);
+    public String findByName(Long id) {
+        Student s = studentRepository.findStudentById(id);
         if (s == null) {
             return null;
         }
-        return s;
+        return s.getFaculty();
     }
 }

@@ -43,10 +43,10 @@ public class StudentController {
     }
 
     @GetMapping("studentFaculty")
-    public ResponseEntity<Collection<Student>> findByName(@RequestParam String name) {
-        Collection<Student> faculty = studentService.findByName(name);
-        if (faculty != null) {
-            return ResponseEntity.ok(faculty);
+    public ResponseEntity<String> findByName(@RequestParam Long id) {
+        String f = studentService.findByName(id);
+        if (f != null) {
+            return ResponseEntity.ok(f);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

@@ -1,5 +1,7 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,19 +16,13 @@ public class Faculty {
     private String name;
     private String color;
     @OneToMany(mappedBy = "faculty")
+    @JsonManagedReference
     private Collection<Student> studentCollection;
 
-//    public Collection<Student> getStudentCollection() {
-//        return studentCollection;
-//    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Faculty faculty = (Faculty) o;
-        return Objects.equals(id, faculty.id) && Objects.equals(name, faculty.name) && Objects.equals(color, faculty.color) && Objects.equals(studentCollection, faculty.studentCollection);
+    public Collection<Student> getStudentCollection() {
+        return studentCollection;
     }
+
 
     @Override
     public int hashCode() {
@@ -58,6 +54,13 @@ public class Faculty {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Faculty faculty = (Faculty) o;
+        return Objects.equals(id, faculty.id) && Objects.equals(name, faculty.name) && Objects.equals(color, faculty.color) && Objects.equals(studentCollection, faculty.studentCollection);
+    }
+    @Override
     public String toString() {
         return "Faculty{" +
                 "id=" + id +
@@ -65,8 +68,4 @@ public class Faculty {
                 ", color='" + color + '\'' +
                 '}';
     }
-    public String collectionStudents(){
-        return "Студенты" + "\n" + studentCollection;
-    }
-
 }

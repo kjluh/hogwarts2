@@ -43,7 +43,7 @@ public class FacultyController {
     }
 
     @GetMapping("findAllStudentsByFaculty")
-    public String findByName(@RequestParam String name) {
+    public Collection<Student> findByName(@RequestParam String name) {
         return facultyService.findByName(name);
     }
 
