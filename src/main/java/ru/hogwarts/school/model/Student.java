@@ -24,6 +24,10 @@ public class Student {
         return facultyInfo;
     }
 
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
     public Long getId() {
         return id;
     }
