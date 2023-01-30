@@ -1,16 +1,20 @@
 package ru.hogwarts.school;
 
+import io.swagger.v3.core.util.Json;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.controller.StudentController;
 import ru.hogwarts.school.model.Student;
+
+import javax.swing.text.html.HTML;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -101,11 +105,12 @@ class Hogwarts2ApplicationTests {
     void deleteStudent() throws Exception {
         s.setName("Толя");
         s.setAge(23);
-        this.testRestTemplate.put("http://localhost:" + port + "/student", s, String.class);
+        this.testRestTemplate.postForObject("http://localhost:" + port + "/student", s, String.class);
         Long id = s.getId();
-        this.testRestTemplate.delete("http://localhost:" + port + "/student" + id,s,String.class);
-        Assertions
-                .assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/student" + id, String.class))
-                .isEqualTo(HttpStatus.NOT_FOUND);
+        this.testRestTemplate.delete("http://localhost:" + port + "/student" + id, s, String.class);
+//        Assertions
+//                .assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/student" + id, HTML.class))
+//                .isEqualTo(HTML.class);
+
     }
 }

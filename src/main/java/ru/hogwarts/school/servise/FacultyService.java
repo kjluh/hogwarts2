@@ -1,5 +1,6 @@
 package ru.hogwarts.school.servise;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -39,8 +40,20 @@ public class FacultyService {
     public Faculty findByNameIgnoreCaseOrColorIgnoreCase(String name, String color) {
         return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
-    public Collection<Student> findByName(String name){
-       Faculty f =  facultyRepository.findFacultyByNameIgnoreCase(name);
+
+    public Collection<Student> findByName(String name) {
+        Faculty f = facultyRepository.findFacultyByNameIgnoreCase(name);
         return f.getStudentCollection();
     }
+
+    public String getAllStudents() {
+        String count = " " + facultyRepository.getAllStudents() + " ";
+        return "количество студентов в школе: " + count;
+    }
+
+    public String getAvgAge() {
+        String age = " " + facultyRepository.getAvgAge() + " ";
+        return "средний возраст студентов в школе: " + age;
+    }
+
 }

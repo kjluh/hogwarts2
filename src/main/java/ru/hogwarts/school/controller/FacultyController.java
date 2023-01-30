@@ -28,7 +28,7 @@ public class FacultyController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("allfaculty/{color}")
+    @GetMapping("all-faculty/{color}")
     public List<Faculty> getFacultyByColor(@PathVariable String color) {
         return facultyService.getFacultyByColor(color);
     }
@@ -42,9 +42,17 @@ public class FacultyController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("findAllStudentsByFaculty")
+    @GetMapping("findAll-students-by-faculty")
     public Collection<Student> findByName(@RequestParam String name) {
         return facultyService.findByName(name);
+    }
+    @GetMapping("count-students")
+    public String getAllStudents(){
+        return facultyService.getAllStudents();
+    }
+    @GetMapping("avg-age-students")
+    public String getAvgAge(){
+        return facultyService.getAvgAge();
     }
 
     @PostMapping

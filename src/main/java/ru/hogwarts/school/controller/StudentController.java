@@ -72,6 +72,10 @@ public class StudentController {
         headers.setContentLength(avatar.getData().length);
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
     }
+    @GetMapping("5-students")
+    public Collection<Student> getFiveStudents(){
+        return studentService.getFiveStudents();
+    }
 
     @PostMapping
     public Student createStudent(@RequestBody Student student) {

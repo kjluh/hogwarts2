@@ -1,10 +1,8 @@
 package ru.hogwarts.school.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Avatar;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.servise.AvatarService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/student")
@@ -36,5 +35,8 @@ public class AvatarController {
             is.transferTo(os);
         }
     }
-
+    @GetMapping("list-avatar")
+    public Collection<Avatar> getAvatarPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size){
+        return avatarService.getAvatarPage(page,size);
+    }
 }

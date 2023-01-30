@@ -1,5 +1,6 @@
 package ru.hogwarts.school.servise;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -46,5 +47,9 @@ public class StudentService {
             return null;
         }
         return s.getFaculty();
+    }
+
+    public Collection<Student> getFiveStudents() {
+        return studentRepository.get5Students();
     }
 }
