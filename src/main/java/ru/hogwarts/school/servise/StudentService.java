@@ -52,4 +52,13 @@ public class StudentService {
     public Collection<Student> getFiveStudents() {
         return studentRepository.get5Students();
     }
+    public String getAllStudents() {
+        String count = " " + studentRepository.getAllStudents() + " ";
+        return "количество студентов в школе: " + count;
+    }
+
+    public String getAvgAge() {
+        String age = " " + studentRepository.getAvgAge() + " ";
+        return "средний возраст студентов в школе: " + age;
+    }
 }

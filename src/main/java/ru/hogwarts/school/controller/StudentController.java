@@ -76,6 +76,14 @@ public class StudentController {
     public Collection<Student> getFiveStudents(){
         return studentService.getFiveStudents();
     }
+    @GetMapping("count-students")
+    public String getAllStudents(){
+        return studentService.getAllStudents();
+    }
+    @GetMapping("avg-age-students")
+    public String getAvgAge(){
+        return studentService.getAvgAge();
+    }
 
     @PostMapping
     public Student createStudent(@RequestBody Student student) {

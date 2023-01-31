@@ -46,14 +46,6 @@ public class FacultyController {
     public Collection<Student> findByName(@RequestParam String name) {
         return facultyService.findByName(name);
     }
-    @GetMapping("count-students")
-    public String getAllStudents(){
-        return facultyService.getAllStudents();
-    }
-    @GetMapping("avg-age-students")
-    public String getAvgAge(){
-        return facultyService.getAvgAge();
-    }
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {

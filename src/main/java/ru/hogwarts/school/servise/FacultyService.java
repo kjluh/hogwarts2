@@ -45,15 +45,4 @@ public class FacultyService {
         Faculty f = facultyRepository.findFacultyByNameIgnoreCase(name);
         return f.getStudentCollection();
     }
-
-    public String getAllStudents() {
-        String count = " " + facultyRepository.getAllStudents() + " ";
-        return "количество студентов в школе: " + count;
-    }
-
-    public String getAvgAge() {
-        String age = " " + facultyRepository.getAvgAge() + " ";
-        return "средний возраст студентов в школе: " + age;
-    }
-
 }
