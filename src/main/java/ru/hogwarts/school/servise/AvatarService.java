@@ -21,8 +21,9 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 public class AvatarService {
     @Value("{Avatar.cover.dir.path}")
     private String coversDir;
-    private AvatarRepository avatarRepository;
-    private StudentService studentService;
+
+    private final AvatarRepository avatarRepository;
+    private final StudentService studentService;
 
     public AvatarService(AvatarRepository avatarRepository, StudentService studentService) {
         this.avatarRepository = avatarRepository;

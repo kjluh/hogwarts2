@@ -102,15 +102,14 @@ class Hogwarts2ApplicationTests {
     }
 
     @Test
-    void deleteStudent() throws Exception {
+    void deleteStudent() throws RuntimeException {
         s.setName("Толя");
         s.setAge(23);
         this.testRestTemplate.postForObject("http://localhost:" + port + "/student", s, String.class);
         Long id = s.getId();
         this.testRestTemplate.delete("http://localhost:" + port + "/student" + id, s, String.class);
-//        Assertions
-//                .assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/student" + id, HTML.class))
-//                .isEqualTo(HTML.class);
+        Assertions
+                .assertThatThrownBy(()->this.testRestTemplate.getForObject("http://localhost:" + port + "/student" + id, Student.class));
 
     }
 }

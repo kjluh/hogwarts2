@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+
 @Entity
 public class Faculty {
     @Id
@@ -19,7 +20,6 @@ public class Faculty {
     public Collection<Student> getStudentCollection() {
         return studentCollection;
     }
-
 
     @Override
     public int hashCode() {
@@ -55,8 +55,9 @@ public class Faculty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return Objects.equals(id, faculty.id) && Objects.equals(name, faculty.name) && Objects.equals(color, faculty.color) && Objects.equals(studentCollection, faculty.studentCollection);
+        return Objects.equals(id, faculty.id);
     }
+
     @Override
     public String toString() {
         return "Faculty{" +
