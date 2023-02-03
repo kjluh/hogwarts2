@@ -4,8 +4,7 @@ create table people
     name           varchar not null,
     age            integer default 1,
     driver_license boolean default 0,
-    car integer[],
-    foreign key (car) references auto (id)
+    car integer[] references auto (id)
 );
 create table auto
 (
@@ -13,8 +12,7 @@ create table auto
     mark           varchar not null,
     model           varchar default 'supra',
     cost        integer not null ,
-    driver integer,
-    foreign key ( driver ) references  people (id)
+    driver integer references  people (id)
 );
 
 select student.name, student.age, faculty.name

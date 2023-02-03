@@ -21,6 +21,10 @@ public class Faculty {
         return studentCollection;
     }
 
+    public void setStudentCollection(Student student) {
+        this.studentCollection.add(student);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name, color, studentCollection);
