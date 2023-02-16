@@ -25,6 +25,16 @@ public class StudentController {
         this.avatarService = avatarService;
     }
 
+    @GetMapping("searchForNameByLetter/{letter}")
+    public List<String> searchForNameByLetter(@PathVariable String letter){
+        return studentService.searchForNameByLetter(letter);
+    }
+
+    @GetMapping("middleAge")
+    public double middleAge(){
+        return studentService.middleAge();
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         Student example = studentService.getStudent(id);

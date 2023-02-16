@@ -19,6 +19,11 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
+    @GetMapping("longNameFaculty")
+    public String longNameFaculty(){
+       return facultyService.longNameFaculty();
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFaculty(@PathVariable Long id) {
         Faculty example = facultyService.getFaculty(id);

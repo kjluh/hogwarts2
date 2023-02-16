@@ -1,8 +1,11 @@
 package ru.hogwarts.school.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.servise.AvatarService;
+import ru.hogwarts.school.servise.FacultyService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,7 +24,6 @@ public class AvatarController {
         this.avatarService = avatarService;
     }
 
-
     @GetMapping(value = "/{id}/avatar-from-file")
     public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException {
         Avatar avatar = avatarService.findAvatar(id);
@@ -38,5 +40,10 @@ public class AvatarController {
     @GetMapping("list-avatar")
     public Collection<Avatar> getAvatarPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size){
         return avatarService.getAvatarPage(page,size);
+    }
+
+    @GetMapping("sum4you")
+    public Integer sum4you(){
+        return avatarService.sum4you();
     }
 }
