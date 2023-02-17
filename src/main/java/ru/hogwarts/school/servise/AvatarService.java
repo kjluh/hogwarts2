@@ -75,10 +75,9 @@ public class AvatarService {
         long start = System.currentTimeMillis();
         int sum1 = 0;
         for (int i = 0; i < 100_000_000; i++) {
-               sum1+=i;
+                sum1 =( ( 2*1 + 1*(100_000_000-1) ) / 2) *100_000_000;
         }
 //        int sum = Stream.iterate(1, a -> a + 1)
-//          //      .parallel()
 //                .limit(100_000_000)
 //                .mapToInt(Integer::intValue)
 //                .sum();
