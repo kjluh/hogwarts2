@@ -73,13 +73,17 @@ public class AvatarService {
 
     public Integer sum4you() {
         long start = System.currentTimeMillis();
-        int sum = Stream.iterate(1, a -> a + 1)
-          //      .parallel()
-                .limit(100_000_000)
-                .mapToInt(Integer::intValue)
-                .sum();
+        int sum1 = 0;
+        for (int i = 0; i < 100_000_000; i++) {
+               sum1+=i;
+        }
+//        int sum = Stream.iterate(1, a -> a + 1)
+//          //      .parallel()
+//                .limit(100_000_000)
+//                .mapToInt(Integer::intValue)
+//                .sum();
         long timeRequest = System.currentTimeMillis() - start;
         logger.info("time = " + timeRequest + " ms");
-        return sum;
+        return sum1;
     }
 }
