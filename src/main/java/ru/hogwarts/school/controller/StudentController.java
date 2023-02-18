@@ -117,4 +117,15 @@ public class StudentController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    @GetMapping("console")
+    public String console(){
+        studentService.NameIn3Thread();
+        return "console";
+    }
+    @GetMapping("console2")
+    public String console2(){
+        studentService.NameIn3Thread2();
+        return "console";
+    }
 }

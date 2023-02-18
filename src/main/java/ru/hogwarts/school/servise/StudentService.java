@@ -79,12 +79,73 @@ public class StudentService {
 
     public List<String> searchForNameByLetter(String letter) {
         return studentRepository.
-                findAll().stream().map(e->e.getName().toUpperCase()).
-                filter(e->e.charAt(0)==letter.toUpperCase().charAt(0)).toList();
+                findAll().stream().map(e -> e.getName().toUpperCase()).
+                filter(e -> e.charAt(0) == letter.toUpperCase().charAt(0)).toList();
     }
 
     public double middleAge() {
         return studentRepository.findAll().stream().
                 mapToInt(Student::getAge).average().orElseThrow();
+    }
+
+    public void NameIn3Thread() {
+        String[] nameStudent = helpmetod2();
+
+        helpmetod(nameStudent[0]);
+        System.out.println("поток 1");
+        helpmetod(nameStudent[1]);
+        System.out.println("поток 1");
+
+        new Thread(() -> {
+            helpmetod(nameStudent[2]);
+            System.out.println("поток 2");
+            helpmetod(nameStudent[3]);
+            System.out.println("поток 2");
+        }).start();
+
+        new Thread(() -> {
+            helpmetod(nameStudent[4]);
+            System.out.println("поток 3");
+            helpmetod(nameStudent[5]);
+            System.out.println("поток 3");
+        }).start();
+//        System.out.println(nameStudent[0]);
+//        new Thread(() ->{
+//                System.out.println(nameStudent[2]);
+//                System.out.println(nameStudent[3]);
+//        }).start();
+//        new Thread(() ->{
+//            System.out.println(nameStudent[4]);
+//            System.out.println(nameStudent[5]);
+//        }).start();
+//        System.out.println(nameStudent[1]);
+    }
+
+    private void helpmetod(String string) {
+        synchronized (flag) {
+            System.out.println(string);
+        }
+    }
+
+    private String[] helpmetod2() {
+        return studentRepository.findAll().stream().map(Student::getName).toList().toArray(new String[7]);
+    }
+
+    private Object flag = new Object();
+
+    public void NameIn3Thread2() {
+        String[] nameStudent = helpmetod2();
+        helpmetod(nameStudent[0]);
+        helpmetod(nameStudent[1]);
+
+        new Thread(() -> {
+            helpmetod(nameStudent[2]);
+            helpmetod(nameStudent[3]);
+        }).start();
+
+        new Thread(() -> {
+            helpmetod(nameStudent[4]);
+            helpmetod(nameStudent[5]);
+        }).start();
     }
 }
