@@ -89,63 +89,41 @@ public class StudentService {
     }
 
     public void NameIn3Thread() {
-        String[] nameStudent = helpmetod2();
+        String[] nameStudent = helpMetod2();
 
-        helpmetod(nameStudent[0]);
-        System.out.println("поток 1");
-        helpmetod(nameStudent[1]);
-        System.out.println("поток 1");
+        Thread thread2 = new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[2] + " " + nameStudent[3]);
+        });
 
-        new Thread(() -> {
-            helpmetod(nameStudent[2]);
-            System.out.println("поток 2");
-            helpmetod(nameStudent[3]);
-            System.out.println("поток 2");
-        }).start();
-
-        new Thread(() -> {
-            helpmetod(nameStudent[4]);
-            System.out.println("поток 3");
-            helpmetod(nameStudent[5]);
-            System.out.println("поток 3");
-        }).start();
-//        System.out.println(nameStudent[0]);
-//        new Thread(() ->{
-//                System.out.println(nameStudent[2]);
-//                System.out.println(nameStudent[3]);
-//        }).start();
-//        new Thread(() ->{
-//            System.out.println(nameStudent[4]);
-//            System.out.println(nameStudent[5]);
-//        }).start();
-//        System.out.println(nameStudent[1]);
+        Thread thread3 = new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[4] + " " + nameStudent[5]);
+        });
+        thread2.start();
+        System.out.println(Thread.currentThread().getName() + " " + nameStudent[0] + " " + nameStudent[1]);
+        thread3.start();
     }
-
-    private void helpmetod(String string) {
-        synchronized (flag) {
-            System.out.println(string);
-        }
+    private String[] helpMetod2() {
+        return studentRepository.findAll().stream().map(Student::getName).limit(6).toList().toArray(new String[0]);
     }
-
-    private String[] helpmetod2() {
-        return studentRepository.findAll().stream().map(Student::getName).toList().toArray(new String[7]);
-    }
-
-    private Object flag = new Object();
-
+    private final Object flag = new Object();
+    private int count = 0;
     public void NameIn3Thread2() {
-        String[] nameStudent = helpmetod2();
-        helpmetod(nameStudent[0]);
-        helpmetod(nameStudent[1]);
-
+        String[] nameStudent2 = helpMetod2();
+        getName(nameStudent2[0]);
+        getName(nameStudent2[1]);
         new Thread(() -> {
-            helpmetod(nameStudent[2]);
-            helpmetod(nameStudent[3]);
+            getName(nameStudent2[2]);
+            getName(nameStudent2[3]);
         }).start();
 
         new Thread(() -> {
-            helpmetod(nameStudent[4]);
-            helpmetod(nameStudent[5]);
+            getName(nameStudent2[4]);
+            getName(nameStudent2[5]);
         }).start();
+    }
+    private void getName(String s){
+      synchronized (flag){
+          System.out.println(Thread.currentThread().getName() + " " + s);
+        }
     }
 }
