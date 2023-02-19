@@ -92,21 +92,42 @@ public class StudentService {
         String[] nameStudent = helpMetod2();
 
         Thread thread2 = new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() + " " + nameStudent[2] + " " + nameStudent[3]);
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[2]);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[3]);
         });
 
         Thread thread3 = new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() + " " + nameStudent[4] + " " + nameStudent[5]);
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[4]);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(Thread.currentThread().getName() + " " + nameStudent[5]);
         });
         thread2.start();
-        System.out.println(Thread.currentThread().getName() + " " + nameStudent[0] + " " + nameStudent[1]);
+        System.out.println(Thread.currentThread().getName() + " " + nameStudent[0]);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(Thread.currentThread().getName() + " " + nameStudent[1]);
         thread3.start();
     }
+
     private String[] helpMetod2() {
         return studentRepository.findAll().stream().map(Student::getName).limit(6).toList().toArray(new String[0]);
     }
+
     private final Object flag = new Object();
     private int count = 0;
+
     public void NameIn3Thread2() {
         String[] nameStudent2 = helpMetod2();
         getName(nameStudent2[0]);
@@ -121,9 +142,10 @@ public class StudentService {
             getName(nameStudent2[5]);
         }).start();
     }
-    private void getName(String s){
-      synchronized (flag){
-          System.out.println(Thread.currentThread().getName() + " " + s);
+
+    private void getName(String s) {
+        synchronized (flag) {
+            System.out.println(Thread.currentThread().getName() + " " + s);
         }
     }
 }
