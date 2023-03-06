@@ -1,20 +1,17 @@
 package ru.hogwarts.school;
 
-import io.swagger.v3.core.util.Json;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.controller.StudentController;
 import ru.hogwarts.school.model.Student;
 
-import javax.swing.text.html.HTML;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -81,14 +78,6 @@ class Hogwarts2ApplicationTests {
                 .isNotNull();
     }
 
-    //    // НЕ ПОНИМАЮ КАК ТЕСТИТЬ МЕТОД ПОЛУЧЕНИЯ КАРТИНКИ, КАКОЙ КЛАСС ВЫБИРАТЬ.
-////    @Test
-////    void downloadAvatar() throws Exception{
-////        Assertions.assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/student/2/avatar-from-db", MediaType.MULTIPART_FORM_DATA_VALUE.class))
-////                .isNotNull();
-////    }
-//
-//
     @Test
     void updateStudent() throws Exception {
         s.setName("Толя");

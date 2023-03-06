@@ -9,6 +9,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Profile("!test")
@@ -147,5 +148,9 @@ public class StudentService {
         synchronized (flag) {
             System.out.println(Thread.currentThread().getName() + " " + s);
         }
+    }
+
+    public List<String> getStudentsByFaculty_Name(String facultyName){
+        return studentRepository.getStudentsByFacultyNameIgnoreCase(facultyName);
     }
 }

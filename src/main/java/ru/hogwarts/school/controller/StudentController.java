@@ -128,4 +128,9 @@ public class StudentController {
         studentService.NameIn3Thread2();
         return "console";
     }
+
+    @GetMapping("getStudentsByFaculty_Name/{facultyName}")
+    public List<String> getStudentsByFaculty_Name(@PathVariable String facultyName){
+       return studentService.getStudentsByFaculty_Name(facultyName);
+    }
 }

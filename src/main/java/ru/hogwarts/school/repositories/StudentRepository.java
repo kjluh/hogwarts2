@@ -1,6 +1,7 @@
 package ru.hogwarts.school.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import ru.hogwarts.school.model.Student;
 
@@ -19,5 +20,10 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     @Query(value = "SELECT AVG(age) FROM student", nativeQuery = true)
     Integer getAvgAge();
+
+//    @Modifying
+    @Query(value = "select student.name from student,faculty where student.faculty_id = faculty.id and faculty.name = ?1"
+    ,nativeQuery = true)
+    List<String> getStudentsByFacultyNameIgnoreCase(String name);
 
 }
